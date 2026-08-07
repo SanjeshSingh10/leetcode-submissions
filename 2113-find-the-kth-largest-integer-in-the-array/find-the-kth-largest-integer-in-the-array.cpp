@@ -1,27 +1,13 @@
-class cmp{
-    public:
-    bool operator()( string  a , string b ){\
-        if(a.size()== b.size() ){
-            return a > b ;
-        }
 
-         return a.size() > b.size() ;
-    }
-};
 class Solution {
 public:
     string kthLargestNumber(vector<string>& nums, int k) {
-         priority_queue<string , vector<string> , cmp> minheap;
+        sort( nums.begin(), nums.end() , []( const string& a , const string& b){
+            int m = a.size() ; int n = b.size();
 
-        for( auto num :nums){
-            
-            minheap.push(num);
+            return m !=n ? m > n : a > b;
+        });
 
-            if(minheap.size()>k){
-                minheap.pop();
-            }
-        }
-        
-        return minheap.top();
+        return nums[ k -1];
     }
 };
