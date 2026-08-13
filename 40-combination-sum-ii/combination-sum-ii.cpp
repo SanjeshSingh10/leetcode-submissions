@@ -1,0 +1,39 @@
+class Solution {
+public:
+    void findcombination( int ind , int target , vector<int>& arr , vector<int>& ds , vector<vector<int>>& ans ){
+        
+        if( target == 0 ){
+            ans.push_back( ds );
+            return; 
+        }
+
+
+        for( int i = ind ; i< arr.size() ; i++){
+
+           if( i > ind && arr[i] == arr[i-1] ) continue ;
+
+           if( arr[i] > target ) break ; 
+
+           ds.push_back(arr[i] );
+
+           findcombination( i+1 , target - arr[i] , arr , ds , ans );
+
+           ds.pop_back();           
+        }
+
+    }
+
+
+    vector<vector<int>> combinationSum2(vector<int>& arr, int target) {
+
+        sort(arr.begin()  , arr.end());
+
+        vector<int> ds ;
+        vector<vector<int>> ans ;
+
+        findcombination( 0 , target , arr , ds , ans);
+
+        return ans ;
+
+    }
+};
